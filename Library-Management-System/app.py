@@ -8,7 +8,7 @@ app.secret_key = 'secret-key-2022'
 
 @app.route('/')
 def index():
-   return render_template("index.html")
+   return render_template("login.html")
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
@@ -289,7 +289,6 @@ def deleteUser(userID):
       mycursor.close()
       mydb.close()
       return render_template("searchUser.html", users = datas)
-
 
 if __name__ == '__main__':
    app.run(debug = True)

@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
     <title>Search User</title>
 </head>
 <body>
     <div>
         <nav><a href="/home">Home</a></nav>
-        <h1>Search User</h1>
+        <h1 class="header">Search User</h1>
     </div>
-    <form action="/searchUser" method="post">
-        <div>
-            <input type="search" name="name" id="" placeholder="search User by name...">
-            <input type="submit" value="Find">
-        </div>
-    </form>
+    <div class="form">
+        <form action="/searchUser" method="post">
+            <div>
+                <input type="search" name="name" id="" placeholder="search User by name...">
+                <input type="submit" value="Find">
+            </div>
+        </form>
+    </div>
+    
     <a href="/searchUser">Show All User</a>
     <div>
         <h1>Library Members</h1>

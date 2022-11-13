@@ -4,41 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
     <title>Edit Book</title>
 </head>
 <body>
     <div>
         <nav><a href="/home">Home</a></nav>
-        <h1>Edit Book</h1>
+        <h1 class="header">Edit Book</h1>
     </div>
-    <form action="/editBook/{{book[2]}}" method="post">
-        <div>
-            <label for="title">Book Title</label><br>
-            <input type="text" name="title" value = {{book[0]}} id="title">  
-        </div>
-        <div>
-            <label for="author">Author</label><br>
-            <input type="text" name="author" value = {{book[1]}} id="author"> 
-        </div>
-        <div>
-            <label for="isbn">ISBN</label><br>
-            <input type="number" name="isbn" value = {{book[2]}} id="isbn" readonly>      
-        </div>
-        <div>
-            <label for="pubDate">Publish Date</label><br>
-            <input type="date" name="pubDate" value = {{book[3]}} id="pubDate">       
-        </div>
-        <div>
-            <label for="publication">Publication</label><br>
-            <input type="text" name="publication" value = {{book[4]}} id="publication">    
-        </div>
-        <div>
-            <label for="nob">No Of Books</label><br>
-            <input type="number" name="nob" value = {{book[5]}} id="nob">  
-        </div>
-        <div>
-            <input type="submit" value="Update">
-        </div>
-    </form>
+    <div class="form">
+        <form action="/editBook/{{book[2]}}" method="post">
+            <div>
+                <label for="title">Book Title</label><br>
+                <input type="text" name="title" value = {{book[0]}} id="title">  
+            </div>
+            <div>
+                <label for="author">Author</label><br>
+                <input type="text" name="author" value = {{book[1]}} id="author"> 
+            </div>
+            <div>
+                <label for="isbn">ISBN</label><br>
+                <input type="number" name="isbn" value = {{book[2]}} id="isbn" readonly>      
+            </div>
+            <div>
+                <label for="pubDate">Publish Date</label><br>
+                <input type="date" name="pubDate" value = {{book[3]}} id="pubDate">       
+            </div>
+            <div>
+                <label for="publication">Publication</label><br>
+                <input type="text" name="publication" value = {{book[4]}} id="publication">    
+            </div>
+            <div>
+                <label for="nob">No Of Books</label><br>
+                <input type="number" name="nob" value = {{book[5]}} id="nob">  
+            </div>
+            <div>
+                <input type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+    
 </body>
 </html>
