@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search User</title>
+</head>
+<body>
+    <div>
+        <nav><a href="/home">Home</a></nav>
+        <h1>Search User</h1>
+    </div>
+    <form action="/searchUser" method="post">
+        <div>
+            <input type="search" name="name" id="" placeholder="search User by name...">
+            <input type="submit" value="Find">
+        </div>
+    </form>
+    <a href="/searchUser">Show All User</a>
+    <div>
+        <h1>Library Members</h1>
+    </div>
+    <hr>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Name</th>                
+                    <th>Mail ID</th>
+                    <th>User ID</th>
+                    <th>Password</th>
+                    <th>Phone Number</th>
+                    <th>Gender</th>
+                    <th>Blood Group</th>
+                    <th>Address</th>
+                    <th>User Type</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% for user in users %}
+                <tr>
+                    <td>{{user[0]}}</td>
+                    <td>{{user[1]}}</td>
+                    <td>{{user[2]}}</td>
+                    <td>{{user[3]}}</td>
+                    <td>{{user[4]}}</td>
+                    <td>{{user[5]}}</td>
+                    <td>{{user[6]}}</td>
+                    <td>{{user[7]}}</td>
+                    <td>{{user[8]}}</td>
+                    <td><a href="{{url_for('editUser',userID=user[2])}}">Edit</a></td>
+                    <td><form action="/deleteUser/{{user[2]}}"
+                        method="post"
+                        onsubmit="return confirm('Are you sure you wish to delete?');">
+                        <input type="submit" value="Delete">
+                    </form></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <hr>
+</body>
+</html>

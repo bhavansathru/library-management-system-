@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issued Book</title>
+</head>
+<body>
+    <div>
+        <nav><a href="/home">Home</a></nav>
+        <h1>Issued Books</h1>
+    </div>
+    <hr>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>User Id</td>
+                    <td>ISBN</td>
+                    <td>Issue Date</td>
+                    <td>Return Date</td>
+                    <td>Fine</td>
+                </tr>
+            </thead>
+            {% for book in books %}
+                <tr>
+                    <td>{{book[0]}}</td>
+                    <td>{{book[1]}}</td>
+                    <td>{{book[2]}}</td>
+                    <td>{{book[3]}}</td>
+                    <td>{{book[4]}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <hr>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+</head>
+<body>
+    <div>
+        <nav><a href="/home">Home</a></nav>
+        <h1">Add New Book</h1>
+    </div>
+    <form action="/home" method="post">
+        <div>
+            <label for="title">Book Title</label><br>
+            <input type="text" name="title" id="title">
+        </div>
+        <div>
+            <label for="author">Author</label><br>
+            <input type="text" name="author" id="author"> 
+        </div>
+        <div>
+            <label for="isbn">ISBN</label><br>
+            <input type="number" name="isbn" id="isbn">    
+        </div>
+        <div>
+            <label for="pubDate">Publish Date</label><br>
+            <input type="date" name="pubDate" id="pubDate">    
+        </div>
+        <div>
+            <label for="publication">Publication</label><br>
+            <input type="text" name="publication" id="publication">      
+        </div>
+        <div>
+            <label for="nob">No Of Books</label><br>
+            <input type="number" name="nob" id="nob">  
+        </div>
+        <div>
+            <input type="submit" value="Save">
+        </div>
+        
+    </form>
+    </div>
+</body>
+</html>

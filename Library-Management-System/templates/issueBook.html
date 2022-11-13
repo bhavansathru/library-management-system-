@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Book</title>
+</head>
+<body>
+    <div>
+        <nav><a href="/home">Home</a></nav>
+        <h1>Issue Book</h1>
+    </div>
+    <form action="/issueBook" method="post">
+        <div>
+            <label for="userId">User ID</label><br>
+            <input type="text" name="userId" id="userId">
+        </div>
+        <div>
+            <label for="bookId">ISBN</label><br>
+            <input type="number" name="isbn" id="bookId">
+        </div>
+        <div>
+            <label for="issueDate">Issue Date</label><br>
+            <input type="date" name="issueDate" id="issueDate">
+        </div>
+        <div>
+            <input type="submit" value="Issue">
+        </div>     
+    </form>    
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+</head>
+<body>
+    <div>
+        <nav><a href="/home">Home</a></nav>
+        <h1>Edit User</h1>
+    </div>
+    <form action="/editUser/{{user[2]}}" method="post">
+        <div>
+            <label for="name">User Name</label><br>
+            <input type="text" name="name" id="name" value = {{user[0]}}>   
+        </div>
+        <div>
+            <label for="mail">Mail ID</label><br>
+            <input type="email" name="email" id="email" value = {{user[1]}} readonly>      
+        </div>
+        <div>
+            <label for="password">Password</label><br>
+            <input type="password" name="password" id="password" value = {{user[3]}}>       
+        </div>
+        <div>
+            <label for="phno">Phone Number</label><br>
+            <input type="number" name="phno" id="phno" value = {{user[4]}}> 
+        </div>
+        <div>
+            <label for="gender">Gender</label>  
+        </div>
+        <select name="gender">
+            <option>{{user[5]}}</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Others</option>
+        </select>
+        <div>
+            <label for="bloodgroup">Blood Group</label> 
+        </div>
+        <select name="bloodgroup">
+            <option>{{user[6]}}</option>
+            <option>A Positive</option>
+            <option>A Negative</option>
+            <option>A Unknown</option>
+            <option>B Positive</option>
+            <option>B Negative</option>
+            <option>B Unknown</option>
+            <option>AB Positive</option>
+            <option>AB Negative</option>
+            <option>AB Unknown</option>
+            <option>O Positive</option>
+            <option>O Negative</option>
+            <option>O Unknown</option>
+            <option >Unknown</option>
+        </select>
+        <div>
+            <label for="address">Address</label>    
+        </div>
+        <textarea name="address" id="" cols="30" rows="3">{{user[7]}}</textarea>
+        <div>
+            <label for="userType">User Type</label> 
+        </div>
+        <select name="userType">
+            <option>{{user[8]}}</option>
+            <option value="admin" >Admin</option>
+            <option value = "member">Meber</option>
+        </select>   
+        <div>
+            <input type="submit" value="Save">  
+        </div>
+    </form>
+</body>
+</html>

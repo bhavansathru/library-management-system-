@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Book</title>
+</head>
+<body>
+    <div>
+        <nav><a href="/home">Home</a></nav>
+        <h1>Search Books</h1>
+    </div>
+    <form action="/searchBook" method="post">
+        <div>
+            <input type="search" name="title" id="search" placeholder="search book by name...">
+            <input type="submit" value="Find">
+        </div>
+    </form>
+    <a href="/searchBook">Show All Books</a>
+    <div>
+        <h1>Available Books</h1>
+    </div>
+    <hr>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>                
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Publish Date</th>
+                    <th>Publication</th>
+                    <th>No Of Books</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% for book in books %}
+                <tr>
+                    <td>{{book[0]}}</td>
+                    <td>{{book[1]}}</td>
+                    <td>{{book[2]}}</td>
+                    <td>{{book[3]}}</td>
+                    <td>{{book[4]}}</td>
+                    <td>{{book[5]}}</td>
+                    <td><a href="{{url_for('editBook',bookId=book[2])}}">Edit</a></td>
+                    <td><form action="/deleteBook/{{book[2]}}" method="post" 
+                        onsubmit="return confirm('Are you sure you wish to delete?');">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <hr>
+</body>
+</html>
