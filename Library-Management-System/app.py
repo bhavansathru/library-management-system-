@@ -1,6 +1,40 @@
+import threading
+import requests
+import json
 import sqlite3
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, session, url_for
+
+def addApiBooks():
+   mydb = sqlite3.connect('lbms.db')
+   mycursor = mydb.cursor()
+   try:
+      qry= "select * from bookStocks"
+      mycursor.execute(qry)
+   except:
+      datas = None
+   else:
+      datas = mycursor.fetchall()
+   if not bool(datas):
+      req = requests.get("https://frappe.io/api/method/frappe-library")
+      apiBooks = json.loads(req.content)['message']
+      myBook = []
+      for book in apiBooks:
+         book = {'title' : book['title'],'authors' : book['authors'],
+                  'isbn' : book['isbn'],'publicationDate' : book['publication_date'],
+                  'publication' : book['publisher'], 'nob' : 0}
+         myBook.append(book)
+      books = [tuple(book.values()) for book in myBook]
+      qry = """create table if not exists bookStocks (title text, author text, isbn text primary key,
+         pubDate text, publication text, nob integer)"""
+      qry2 = "insert into bookStocks (title, author, isbn, pubDate, publication, nob) values (?, ?, ?, ?, ?, ?)"
+      mycursor.execute(qry)
+      mycursor.executemany(qry2, books)
+   mydb.commit()
+   mycursor.close()
+   mydb.close()
+t1 = threading.Thread(target = addApiBooks)
+t1.start() 
 
 app = Flask(__name__)
 
@@ -22,12 +56,12 @@ def login():
         (userId, password))
         data = myCursor.fetchone() 
         myCursor.close()
-        if data :
+        if bool(data):
             flash("you are successfuly logged in") 
             return redirect('/home')
         else:
-         error = "invalid password"  
-   return render_template("login.html", error= error)
+         return  "<h1>invalid User Name password</h1>"  
+   return render_template("login.html")
 
 @app.route('/home')
 def home():
@@ -79,7 +113,7 @@ def addBook():
          print(f"Error : {e}")
       else:
         mycursor = mydb.cursor()
-        qry = """create table if not exists bookStocks (title text, author text, isbn integer primary key,
+        qry = """create table if not exists bookStocks (title text, author text, isbn text primary key,
        pubDate text, publication text, nob integer)"""
         qry2 = "insert into bookStocks (title, author, isbn, pubDate, publication, nob) values (?, ?, ?, ?, ?, ?)"
         mycursor.execute(qry)
@@ -103,7 +137,7 @@ def issueBook():
       else:
          mycursor = mydb.cursor()
          qry1 = """create table if not exists issuedBooks(userId text primary key,
-          isbn integer,issuedDate text, returnDate text, fineAmount integer)"""
+          isbn text,issuedDate text, returnDate text, fineAmount integer)"""
          qry2 = "insert into issuedBooks(userId, isbn, issuedDate)values(?, ?, ?)"
          mycursor.execute(qry1)
          mycursor.execute(qry2, (userId, isbn, issueDate))
@@ -151,8 +185,14 @@ def returnBook():
 def issuedBook():
    mydb = sqlite3.connect("lbms.db")
    mycursor = mydb.cursor()
-   mycursor.execute("select * from issuedBooks ")
-   datas = mycursor.fetchall()
+   datas = []
+   try:
+      mycursor.execute("select * from issuedBooks ")
+   except:
+      qry1 = """create table if not exists issuedBooks(userId text primary key,
+          isbn text,issuedDate text, returnDate text, fineAmount integer)"""
+   else:
+      datas = mycursor.fetchall()
    mydb.commit()
    mycursor.close()
    mydb.close()
@@ -161,6 +201,7 @@ def issuedBook():
 
 @app.route("/searchBook", methods = ['POST', 'GET'])
 def searchBook():
+   addApiBooks()
    mydb = sqlite3.connect("lbms.db")
    mycursor = mydb.cursor()
    mycursor.execute("select * from bookStocks")
@@ -176,10 +217,10 @@ def searchBook():
          return f"<p>{e}</p>"
       else:
          mycursor = mydb.cursor()
-         mycursor.execute("select * from bookStocks where title = ? order by title asc", (title,))
+         mycursor.execute("select * from bookStocks where title like ? order by title asc", ('%'+str(title)+'%',))
          datas = mycursor.fetchall()
          mydb.commit()
-         mycursor.close()
+         mycursor.close()                    
          mydb.close()
          return render_template("searchBook.html", books = datas)
    return render_template("searchBook.html", books = datas)
@@ -193,7 +234,7 @@ def searchUser():
    datas = mycursor.fetchall()
    if request.method == 'POST':
       name = request.form.get("name")
-      mycursor.execute("select * from users where name = ? order by name asc", (name,))
+      mycursor.execute("select * from users where name like ? order by name asc", ('%'+name+'%',))
       datas = mycursor.fetchall()
       mycursor.close()
       return render_template("searchUser.html", users = datas)
@@ -228,6 +269,7 @@ def editBook(bookId):
       datas = mycursor.fetchone()
       mycursor.close()
       mydb.close()
+      print(datas)
       return render_template("editBook.html", book = datas)
 @app.route("/editUser/<string:userID>", methods = ['POST', "GET"])
 def editUser(userID):

@@ -6,29 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
     <title>Return Book</title>
+    <style>
+        input[type="number"], input[type="date"]{
+        padding: 8px 10px;
+        border-radius: 10px;
+        width: 100%;
+        font-size: 16px;
+        font-weight:bolder;
+        margin: 0px 10px 0px 0px;
+    }
+    </style>
 </head>
 <body>
-    <div>
-        <nav><a href="/home">Home</a></nav>
-        <h1 class="header">Return Book</h1>
-    </div>
-    <div class="form">
-        <form action="/returnBook" method="post">
-            <div>
-                <label for="userId">User ID</label><br>
-                <input type="text" name="userId" id="userId"> 
-            </div>
-            <div>
-                <label for="bookId">ISBN</label><br>
-                <input type="number" name="isbn" id="bookId">   
-            </div>
-            <div>
-                <label for="returnDate">Issue Date</label><br>
-                <input type="date" name="returnDate" id="returnDate">   
-            </div>
-            <div>
-                <input type="submit" value="Save">
-            </div>
-        </form>
+    <nav><a href="/home">Home</a></nav>
+    <div class="block">
+        <div>
+            <h1 class="header">Return Book</h1>
+            <hr class="rooler">
+        </div>
+        <div class="center">
+            <form action="/returnBook" method="post">
+                <div>
+                    <label for="userId">User ID</label><br>
+                    <input type="text" name="userId" id="userId"> 
+                </div>
+                <div>
+                    <label for="bookId">ISBN</label><br>
+                    <input type="number" name="isbn" id="bookId">   
+                </div>
+                <div>
+                    <label for="returnDate">Issue Date</label><br>
+                    <input type="date" name="returnDate" id="returnDate">   
+                </div>
+                <div>
+                    <input type="submit" value="Save">
+                </div>
+            </form>
+        </div>
     </div>
 </body>

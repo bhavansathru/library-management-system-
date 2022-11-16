@@ -8,75 +8,77 @@
     <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
     <title>Add User</title>
 </head>
-
 <body>
-    <div>
-        <nav><a href="/home">Home</a></nav>
-        <h1 class="header">Add New User</h1>
-    </div>
-    <div class="form">
-        <form action="\addUser" method="post">
-            <div>
-                <label for="name">User Name</label><br>
-                <input type="text" name="name" id="name">
-            </div>
-            <div>
-                <label for="mail">Mail ID</label><br>
-                <input type="email" name="email" id="email">      
-            </div>
-            <div>
-                <label for="password">Password</label><br>
-                <input type="password" name="password" id="password">   
-            </div>
-            <div>
-                <label for="phno">Phone Number</label><br>
-                <input type="number" name="phno" id="phno"> 
-            </div>
-            <div>
-                <label for="gender">Gender</label>
-            </div>
-            <div>
-                <input type="radio" id="male" name="gender" value="Male">
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">FeMale</label>
-                <input type="radio" id="others" name="gender" value="others">
-                <label for="others">Others</label>
-            </div>
-            <div>
-                <label for="bloodgroup">Blood Group</label>
-            </div>
-            <select name="bloodgroup" data-placeholder="Select Blood-Group">
-                <option>A Positive</option>
-                <option>A Negative</option>
-                <option>A Unknown</option>
-                <option selected>B Positive</option>
-                <option>B Negative</option>
-                <option>B Unknown</option>
-                <option>AB Positive</option>
-                <option>AB Negative</option>
-                <option>AB Unknown</option>
-                <option>O Positive</option>
-                <option>O Negative</option>
-                <option>O Unknown</option>
-                <option >Unknown</option>
-            </select>
-            <div>
-                <label for="address">Address</label>
-            </div>
-            <textarea name="address" id="" cols="30" rows="3"></textarea>   
-            <div>
-                <label for="userType">User Type</label>
-            </div>
-            <select name="userType">
-                <option>Select User Type</option>
-                <option value="admin" >Admin</option>
-                <option value = "member">Member</option>
-            </select>   
-            <div>
-                <input type="submit" value="Save">
-            </div>
-        </form>
+    <nav><a href="/home">Home</a></nav>
+    <div class="block">
+        <div  class="header">
+            <h1>Add New User</h1>
+            <hr class="rooler">
+        </div>
+        <div class="center">
+            <form action="\addUser" method="post">
+                <div>
+                    <label for="name">User Name</label><br>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div>
+                    <label for="mail">Mail ID</label><br>
+                    <input type="email" name="email" id="email">      
+                </div>
+                <div>
+                    <label for="password">Password</label><br>
+                    <input type="password" name="password" id="password">   
+                </div>
+                <div>
+                    <label for="phno">Phone Number</label><br>
+                    <input type="tel" id="phno" name="phno" pattern="[0-9]{10}">
+                </div>
+                <div>
+                    <label for="gender">Gender</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="male" name="gender" value="Male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">FeMale</label>
+                    <input type="radio" id="others" name="gender" value="others">
+                    <label for="others">Others</label>
+                </div>
+                <div>
+                    <label for="bloodgroup">Blood Group</label>
+                </div>
+                <select name="bloodgroup" data-placeholder="Select Blood-Group">
+                    <option>A Positive</option>
+                    <option>A Negative</option>
+                    <option>A Unknown</option>
+                    <option selected>B Positive</option>
+                    <option>B Negative</option>
+                    <option>B Unknown</option>
+                    <option>AB Positive</option>
+                    <option>AB Negative</option>
+                    <option>AB Unknown</option>
+                    <option>O Positive</option>
+                    <option>O Negative</option>
+                    <option>O Unknown</option>
+                    <option >Unknown</option>
+                </select>
+                <div class="textArea">
+                    <label for="address">Address</label>
+                </div>
+                <textarea name="address" id="" cols="30" rows="3"></textarea>   
+                <div>
+                    <label for="userType">User Type</label>
+                </div>
+                <select name="userType">
+                    <option>Select User Type</option>
+                    <option value="admin" >Admin</option>
+                    <option value = "member">Member</option>
+                </select>   
+                <div>
+                    <input type="submit" value="Save">
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 

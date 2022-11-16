@@ -4,25 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/table.css')}}">
     <title>Search Book</title>
 </head>
 <body>
-    <div class="form"> 
-        <nav><a href="/home">Home</a>
+    <nav><a href="/home">Home</a>
         <form action="/searchBook" method="post">
-            <div>
-                <input type="search" name="title" id="search" placeholder="search book by name...">
-                <input type="submit" value="Find">
-            </div>
+            <input type="search" name="title" id="search" placeholder="search book by name...">
+            <input type="submit" value="Find">
         </form>
+        <a href="/searchBook" class="all-book">Show All Books</a>
     </nav>
-    <h1 class="header">Search Books</h1>
-    </div>
-    <a href="/searchBook">Show All Books</a>
-    <div>
-        <h1>Available Books</h1>
-    </div>
+    <h1>Available Books</h1>
     <hr>
     <div>
         <table>
@@ -46,16 +39,15 @@
                     <td>{{book[3]}}</td>
                     <td>{{book[4]}}</td>
                     <td>{{book[5]}}</td>
-                    <td><a href="{{url_for('editBook',bookId=book[2])}}">Edit</a></td>
+                    <td><a class="btn-edit" href="{{url_for('editBook',bookId=book[2])}}">Edit</a></td>
                     <td><form action="/deleteBook/{{book[2]}}" method="post" 
                         onsubmit="return confirm('Are you sure you wish to delete?');">
-                            <input type="submit" value="Delete">
+                            <input class="btn-delete" type="submit" value="Delete">
                         </form>
                     </td>
                 </tr>
             {% endfor %}
         </table>
     </div>
-    <hr>
 </body>
 </html>

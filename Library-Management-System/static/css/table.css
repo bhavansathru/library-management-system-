@@ -1,0 +1,77 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color:skyblue;
+    }
+nav{
+    background-color:rgba(0,0,0,.7);
+    padding: 10px 0px 10px 10px;
+    }
+nav a{
+    background-color: green;
+    font-size: large;
+    color: white;
+    text-decoration: none;
+    padding : 10px 15px;
+    border-radius: 10px;
+}
+form, input[type = "search"]{
+    width: 55%;
+    padding: 10px;
+    margin-left: 40px;
+    border-radius: 50px;
+    text-indent: 10%;
+    display: inline; 
+}
+nav input[type = "submit"]{
+    background-color: orangered;
+    border-radius: 0px 25px 25px 0px;
+    font-size: large;
+    padding: 10px 20px;
+    color: white;
+    border-color:orangered;
+}
+h1{
+    text-align: center;
+    color: blue;
+}
+.all-user, .all-book{
+    float: right;
+    margin-right: 50px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px;
+    }
+th {
+    background-color: #04AA6D;
+    color: white;
+      }
+      
+th, td {
+    border: 3px  solid #04AA6D;
+    text-align: center;
+    padding: 8px;
+}
+.btn-edit{
+    display: block;
+    align-items: center;
+    text-decoration: none;
+    background-color: blue;
+    font-size: larger;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+.btn-delete{
+    margin:none;
+    padding: 5px;
+    background-color: red;
+    font-size: larger;
+    color: white;
+    border-radius: 10px;
+    align-items: left;
+}
+tr:hover {background-color: green;
+color: white;}

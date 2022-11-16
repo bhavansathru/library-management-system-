@@ -1,16 +1,173 @@
-div.header, .header{
-    text-align: center;
-    color: blue;
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color:skyblue;
 }
-div.form
-{
-    display: block;
-    text-align: center;
+.block{
+  text-align: center;
 }
-form
-{
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+.header{
+  text-align: center;
+  width: 100%;
+  color: blue;
+}
+.centre{
+  width: 25%;
+  height: 100%;
+  padding: 20px;
+  display: inline-block;
+  text-align: left;
+  background-color: rgba(0,0,0,.3);
+  border-radius: 15px;
+}
+.userId, .password{
+  margin-right: 20px;
+  margin-left: 15px;
+}
+input[type="text"],input[type="password"]{
+  text-shadow: 3px;
+  margin: 20px 20px;
+  font-size: large;
+  text-align: left;
+  width: 100%;
+  border-radius: 15px;
+  padding: 10px;
+}
+input[type="reset"]{
+  background-color:blue;
+  margin: 10px 20px 10px 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: larger;
+  border-radius: 10px;
+  color: white;
+}
+/*Style for Home*/
+.grid-container {
+  display: grid;
+  grid-template-columns:auto;
+  background-color: skyblue;
+  margin-left: 50px;
+}
+.grid-item {
+  background-color: skyblue;
+  border: none;
+  font-size: 30px;
+  text-align: center;
+}
+.rooler{
+  width: 80%;
+  border-color: black;
+}
+.grid-container-link{
+  display: grid;
+  grid-template-columns:auto auto;
+  padding: 20px 20px;
+}
+.grid-item-link {
+  border-radius: 50px 0px 50px 0px;
+  background-color:rgba(0,99, 88, .3);
+  border: none;
+  font-size: 30px;
+  text-align: center;
+  width: 80%; 
+}
+
+div a{
+  display: block;
+  border-radius: 50px 0px 0px 0px;
+  background-color: #199319;
+  color: white;
+  text-decoration: none;
+  padding: 10px 0px;
+}
+nav{
+  background-color:rgba(0,0,0,.7);
+  padding: 20px 20px 20px 40px;
+}
+a{
+  text-decoration: none;
+  font-size: larger;
+  font-weight: 100px;
+  color: white;
+}
+h1{
+  margin: 10px;
+  text-align: center;
+  color: blue;
+}
+.rooler{
+  width: 50%;
+  border-color: black;
+}
+.block{
+  text-align: center;
+}
+.center{
+  display: inline-block;
+}
+form{
+  text-align: left;
+  margin-top: 30px;
+  font-size: larger;
+  padding-left:5px;
+}
+label{
+  font-size: large;
+  font-weight:bolder;
+  color: black;
+}
+input[type = "text"], input[type = "email"],
+input[type = "password"], input[type = "tel"]{
+  padding: 8px 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-weight:bolder;
+  margin: 0px 10px 0px 0px;
+  padding: 10px;
+}
+.radio{
+  background-color: white;
+  border: 1px solid ;
+  padding: 10px 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 12px;
+}
+input[type="radio"]{
+  width: 30px; 
+  height:15px; 
+  
+}
+select{
+  width: auto; 
+  border : none;
+  border-radius: 10px;
+  font-size: 16px;
+  margin: 0px 10px 0px 0px;
+  padding: 10px 10px;
+}
+textarea{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+input[type="submit"]{
+  margin: 10px 0px 0px 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: larger;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+}
+input[type="number"], input[type="date"]{
+  padding: 8px 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-weight:bolder;
+  margin: 0px 10px 0px 0px;
 }

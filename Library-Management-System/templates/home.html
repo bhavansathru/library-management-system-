@@ -8,30 +8,36 @@
     <title>Admin</title>
 </head>
 <body>
-    <h1 class="header">Library Management System</h1>
-    <a href="/">Logout</a>
-    <div>
-       <div>
-            <a href="/addUser">Add New User</a><br>
-       </div>
-        <div>
-            <a href="/addBook">Add New Book</a><br>
-        </div>
-       <div>
-            <a href="/issueBook">Issue A Book</a><br>
-       </div>
-        <div>
-            <a href="/returnBook">Return Book</a><br>
-        </div>
-        <div>
-            <a href="/issuedBook">Issued Books</a><br>
-        </div>
-        <div>
-            <a href="/searchBook">search Book</a><br>
-        </div>
-        <div>
-            <a href="/searchUser">search User</a><br>
-        </div>
-    </div>    
+    <div class="grid-container">
+        <div class="grid-item">
+            <h1 class="header">Library Management System</h1>
+        </div>  
+        <hr class="rooler">
+        <div class="grid-container-link">
+            <div class="grid-item-link">
+                    <a href="/addUser">Add New User</a><br>
+            </div>
+            <div class="grid-item-link">
+                <a href="/searchUser">search User</a><br>
+            </div>
+            <div class="grid-item-link">
+                <a href="/addBook">Add New Book</a><br>
+            </div>
+            <div class="grid-item-link">
+                <a href="/searchBook">search Book</a><br>
+            </div>
+            <div class="grid-item-link">
+                    <a href="/issueBook">Issue A Book</a><br>
+            </div>
+            <div class="grid-item-link">
+                <a href="/returnBook">Return Book</a><br>
+            </div>
+            <div class="grid-item-link">
+                <a href="/issuedBook">Issued Books</a><br>
+            </div>
+            <div style="display:hide;" class="grid-item-link">
+                <a class="logout" href="/">Logout</a>
+            </div>
+        </div>    
 </body>
 </html>

@@ -6,43 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename = 'css/style.css')}}">
     <title>Add Book</title>
+    <style>
+    input[type="number"], input[type="date"]{
+        padding: 8px 10px;
+        border-radius: 10px;
+        width: 100%;
+        font-size: 16px;
+        font-weight:bolder;
+        margin: 0px 10px 0px 0px;
+    }
+    </style>
 </head>
 <body>
-    <div>
-        <nav><a href="/home">Home</a></nav>
-        <h1 class="header">Add New Book</h1>
-    </div>
-    <div class="form">
-        <form action="/home" method="post">
-            <div>
-                <label for="title">Book Title</label><br>
-                <input type="text" name="title" id="title">
-            </div>
-            <div>
-                <label for="author">Author</label><br>
-                <input type="text" name="author" id="author"> 
-            </div>
-            <div>
-                <label for="isbn">ISBN</label><br>
-                <input type="number" name="isbn" id="isbn">    
-            </div>
-            <div>
-                <label for="pubDate">Publish Date</label><br>
-                <input type="date" name="pubDate" id="pubDate">    
-            </div>
-            <div>
-                <label for="publication">Publication</label><br>
-                <input type="text" name="publication" id="publication">      
-            </div>
-            <div>
-                <label for="nob">No Of Books</label><br>
-                <input type="number" name="nob" id="nob">  
-            </div>
-            <div>
-                <input type="submit" value="Save">
-            </div>
-            
-        </form>
+    <nav><a href="/home">Home</a></nav>
+    <div class="block">
+        <div>
+            <h1 class="header">Add New Book</h1>
+            <hr class="rooler">
+        </div>
+        <div class="center">
+            <form action="/addBook" method="post">
+                <div>
+                    <label for="title">Book Title</label><br>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div>
+                    <label for="author">Author</label><br>
+                    <input type="text" name="author" id="author"> 
+                </div>
+                <div>
+                    <label for="isbn">ISBN</label><br>
+                    <input type="text" name="isbn" id="isbn">    
+                </div>
+                <div>
+                    <label for="pubDate">Publish Date</label><br>
+                    <input type="date" name="pubDate" id="pubDate">    
+                </div>
+                <div>
+                    <label for="publication">Publication</label><br>
+                    <input type="text" name="publication" id="publication">      
+                </div>
+                <div>
+                    <label for="nob">No Of Books</label><br>
+                    <input type="number" name="nob" id="nob">  
+                </div>
+                <div>
+                    <input type="submit" value="Save">
+                </div>
+                
+            </form>
+        </div>
     </div>
 </body>
 </html>
