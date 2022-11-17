@@ -3,8 +3,22 @@ import requests
 import json
 import sqlite3
 from datetime import datetime
-from flask import Flask, flash, redirect, render_template, request, session, url_for
-
+from flask import Flask, flash, redirect, render_template, request, url_for
+def dbActions():
+   mydb = sqlite3.connect('lbms.db')
+   mycursor = mydb.cursor()
+   qry1 = """create table if not exists bookStocks (title text, author text, isbn text primary key,
+       pubDate text, publication text, nob integer)"""
+   qry2 = """create table if not exists users(name text, email text,userId text primary key,
+         password text, phno integer, gender text, bloodgroup text, address text, userType text)"""
+   qry3 = """create table if not exists issuedBooks(userId text primary key,
+          isbn text,issuedDate text, returnDate text, fineAmount integer)"""
+   mycursor.execute(qry1)
+   mycursor.execute(qry2)
+   mycursor.execute(qry3)
+   mydb.commit()
+   mycursor.close()
+   mydb.close()
 def addApiBooks():
    mydb = sqlite3.connect('lbms.db')
    mycursor = mydb.cursor()
@@ -34,7 +48,9 @@ def addApiBooks():
    mycursor.close()
    mydb.close()
 t1 = threading.Thread(target = addApiBooks)
+t2 = threading.Thread(target = dbActions)
 t1.start() 
+t2.start() 
 
 app = Flask(__name__)
 
@@ -46,7 +62,6 @@ def index():
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
-   error = None;  
    if(request.method == 'POST'):
         mydb = sqlite3.connect('lbms.db')
         myCursor = mydb.cursor()
@@ -57,10 +72,9 @@ def login():
         data = myCursor.fetchone() 
         myCursor.close()
         if bool(data):
-            flash("you are successfuly logged in") 
             return redirect('/home')
         else:
-         return  "<h1>invalid User Name password</h1>"  
+            return  "<h1>invalid User Name password</h1>"  
    return render_template("login.html")
 
 @app.route('/home')
@@ -85,11 +99,8 @@ def addUser():
          print(f"Error : {e}")
       else:
         mycursor = mydb.cursor()
-        qry = """create table if not exists users(name text, email text,userId text primary key,
-         password text, phno integer, gender text, bloodgroup text, address text, userType text)"""
         qry2 = """insert into users(name, email, userId, password, phno, gender, bloodgroup, address, userType)
          values (?, ?, ?, ?, ?, ?, ?, ?, ?) """
-        mycursor.execute(qry)
         mycursor.execute(qry2, (name, email,userId, password, phno, gender, bloodgroup, address, userType))
         mydb.commit()
         mycursor.close()
@@ -105,7 +116,7 @@ def addBook():
         title = request.form.get('title')
         author = request.form.get('author')
         isbn = request.form.get('isbn') 
-        pubDate = request.form.get('pubDate')  
+        pubDate = request.form.get('pubDate') 
         publication = request.form.get('publication')
         nob = request.form.get('nob')
         mydb = sqlite3.connect("lbms.db")
@@ -113,10 +124,7 @@ def addBook():
          print(f"Error : {e}")
       else:
         mycursor = mydb.cursor()
-        qry = """create table if not exists bookStocks (title text, author text, isbn text primary key,
-       pubDate text, publication text, nob integer)"""
         qry2 = "insert into bookStocks (title, author, isbn, pubDate, publication, nob) values (?, ?, ?, ?, ?, ?)"
-        mycursor.execute(qry)
         mycursor.execute(qry2, (title, author, isbn, pubDate, publication, nob))
         mydb.commit()
         mycursor.close()
@@ -136,10 +144,7 @@ def issueBook():
          print("Error : ", e)
       else:
          mycursor = mydb.cursor()
-         qry1 = """create table if not exists issuedBooks(userId text primary key,
-          isbn text,issuedDate text, returnDate text, fineAmount integer)"""
          qry2 = "insert into issuedBooks(userId, isbn, issuedDate)values(?, ?, ?)"
-         mycursor.execute(qry1)
          mycursor.execute(qry2, (userId, isbn, issueDate))
          mydb.commit()
          mycursor.close()
@@ -185,48 +190,29 @@ def returnBook():
 def issuedBook():
    mydb = sqlite3.connect("lbms.db")
    mycursor = mydb.cursor()
-   datas = []
-   try:
-      mycursor.execute("select * from issuedBooks ")
-   except:
-      qry1 = """create table if not exists issuedBooks(userId text primary key,
-          isbn text,issuedDate text, returnDate text, fineAmount integer)"""
-   else:
-      datas = mycursor.fetchall()
+   mycursor.execute("select * from issuedBooks ")
+   datas = mycursor.fetchall()
    mydb.commit()
    mycursor.close()
    mydb.close()
    return render_template("issuedBook.html", books = datas)
 
-
 @app.route("/searchBook", methods = ['POST', 'GET'])
 def searchBook():
-   addApiBooks()
    mydb = sqlite3.connect("lbms.db")
    mycursor = mydb.cursor()
    mycursor.execute("select * from bookStocks")
    datas = mycursor.fetchall()
-   mydb.commit()
-   mycursor.close()
-   mydb.close()
    if request.method == 'POST':
-      try:
-         title = request.form.get("title")
-         mydb = sqlite3.connect("lbms.db")
-      except Exception as e:
-         return f"<p>{e}</p>"
-      else:
-         mycursor = mydb.cursor()
-         mycursor.execute("select * from bookStocks where title like ? order by title asc", ('%'+str(title)+'%',))
-         datas = mycursor.fetchall()
-         mydb.commit()
-         mycursor.close()                    
-         mydb.close()
-         return render_template("searchBook.html", books = datas)
+      title = request.form.get("title")
+      mycursor.execute("select * from bookStocks where title like ? order by title asc", ('%'+str(title)+'%',))
+      datas = mycursor.fetchall()
+   mydb.commit()
+   mycursor.close()                    
+   mydb.close()
    return render_template("searchBook.html", books = datas)
-
+   
 @app.route("/searchUser", methods = ['POST', 'GET'])
-@app.route("/searchUser")
 def searchUser():
    mydb = sqlite3.connect("lbms.db")
    mycursor = mydb.cursor()
@@ -236,26 +222,22 @@ def searchUser():
       name = request.form.get("name")
       mycursor.execute("select * from users where name like ? order by name asc", ('%'+name+'%',))
       datas = mycursor.fetchall()
-      mycursor.close()
-      return render_template("searchUser.html", users = datas)
    mycursor.close()
    mydb.commit()
+   mydb.close()
    return render_template("searchUser.html", users = datas)
 
 @app.route("/editBook/<bookId>", methods = ['POST', "GET"])
 def editBook(bookId):
+   mydb = sqlite3.connect("lbms.db")
+   mycursor = mydb.cursor()
    if request.method =="POST":
-      title = request.form.get('title')
-      author = request.form.get('author')
-      isbn = request.form.get('isbn') 
-      pubDate = request.form.get('pubDate')  
-      publication = request.form.get('publication')
-      nob = request.form.get('nob')
-      mydb = sqlite3.connect("lbms.db")
-      mycursor = mydb.cursor()
+      title = request.form.get('title');              author = request.form.get('author')
+      isbn = request.form.get('isbn') ;               pubDate = request.form.get('pubDate')  
+      publication = request.form.get('publication');  nob = request.form.get('nob')
       qry = "update bookStocks set title=?, author=?, isbn=?, pubDate=?, publication=?, nob=? where isbn = ?"
       qry2= "select * from bookStocks"
-      mycursor.execute(qry, (title, author, isbn, pubDate, publication, nob, isbn))
+      mycursor.execute(qry, (title, author, isbn, pubDate, publication, nob, bookId))
       mycursor.execute(qry2)
       datas = mycursor.fetchall()
       mydb.commit()
@@ -263,32 +245,27 @@ def editBook(bookId):
       mydb.close()
       return render_template("searchBook.html", books=datas)
    else:
-      mydb = mydb = sqlite3.connect("lbms.db")
-      mycursor = mydb.cursor()
       mycursor.execute("select * from bookStocks where isbn = ?",(bookId,))
       datas = mycursor.fetchone()
       mycursor.close()
       mydb.close()
       print(datas)
       return render_template("editBook.html", book = datas)
+
 @app.route("/editUser/<string:userID>", methods = ['POST', "GET"])
 def editUser(userID):
+   mydb = sqlite3.connect("lbms.db")
+   mycursor = mydb.cursor()
    if request.method =="POST":
-      name = request.form.get('name')
-      email = request.form.get('email')
-      userId = email[:email.index('@')]
-      password = request.form.get('password') 
-      phno = request.form.get('phno')  
-      gender = request.form.get('gender')
-      bloodgroup = request.form.get('bloodgroup')
-      address = request.form.get('address')
+      name = request.form.get('name');             email = request.form.get('email')
+      userId = email[:email.index('@')];           password = request.form.get('password') 
+      phno = request.form.get('phno') ;            gender = request.form.get('gender')
+      bloodgroup = request.form.get('bloodgroup'); address = request.form.get('address')
       userType = request.form.get('userType')
-      mydb = sqlite3.connect("lbms.db")
-      mycursor = mydb.cursor()
       qry = """update users set name=?, email=?, userId=?, password=?, phno=?, gender=?,
           bloodgroup=?, address=?, userType=? where userId = ?"""
-      qry2= "select * from users"
       mycursor.execute(qry,(name, email,userId, password, phno, gender, bloodgroup, address, userType, userID))
+      qry2= "select * from users"
       mycursor.execute(qry2)
       datas = mycursor.fetchall()
       mydb.commit()
@@ -296,8 +273,6 @@ def editUser(userID):
       mydb.close()
       return render_template("searchUser.html", users=datas)
    else:
-      mydb = mydb = sqlite3.connect("lbms.db")
-      mycursor = mydb.cursor()
       mycursor.execute("select * from users where userId = ?",(userID,))
       datas = mycursor.fetchone()
       mycursor.close()

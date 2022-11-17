@@ -17,7 +17,7 @@
             <form action="/editUser/{{user[2]}}" method="post">
                 <div>
                     <label for="name">User Name</label><br>
-                    <input type="text" name="name" id="name" value = {{user[0]}}>   
+                    <input type="text" name="name" id="name" value = {{user[0]}} required>   
                 </div>
                 <div>
                     <label for="mail">Mail ID</label><br>
@@ -25,16 +25,16 @@
                 </div>
                 <div>
                     <label for="password">Password</label><br>
-                    <input type="password" name="password" id="password" value = {{user[3]}}>       
+                    <input type="password" name="password" id="password" value = {{user[3]}} required>       
                 </div>
                 <div>
                     <label for="phno">Phone Number</label><br>
-                    <input type="tel" id="phno" name="phno" pattern="[0-9]{10}" value = {{user[4]}}>
+                    <input type="tel" id="phno" name="phno" pattern="[0-9]{10}" value = {{user[4]}} required>
                 </div>
                 <div>
                     <label for="gender">Gender</label>  
                 </div>
-                <select name="gender">
+                <select name="gender" required>
                     <option>{{user[5]}}</option>
                     <option>Male</option>
                     <option>Female</option>
@@ -43,7 +43,7 @@
                 <div>
                     <label for="bloodgroup">Blood Group</label> 
                 </div>
-                <select name="bloodgroup">
+                <select name="bloodgroup" required>
                     <option>{{user[6]}}</option>
                     <option>A Positive</option>
                     <option>A Negative</option>
@@ -62,11 +62,11 @@
                 <div>
                     <label for="address">Address</label>    
                 </div>
-                <textarea name="address" id="" cols="30" rows="3">{{user[7]}}</textarea>
+                <textarea name="address" id="" cols="30" rows="3" required>{{user[7]}}</textarea>
                 <div>
                     <label for="userType">User Type</label> 
                 </div>
-                <select name="userType">
+                <select name="userType" required>
                     <option>{{user[8]}}</option>
                     <option value="admin" >Admin</option>
                     <option value = "member">Meber</option>

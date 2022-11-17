@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/table.css')}}">
     <title>Issued Book</title>
 </head>
 <body>
-    <div>
-        <nav><a href="/home">Home</a></nav>
-        <h1 class="header">Issued Books</h1>
-    </div>
+    <nav><a href="/home">Home</a></nav>
+    <h1>Issued Books</h1>
     <hr>
     <div>
         <table>
             <thead>
                 <tr>
-                    <td>User Id</td>
-                    <td>ISBN</td>
-                    <td>Issue Date</td>
-                    <td>Return Date</td>
-                    <td>Fine</td>
+                    <th>User Id</th>
+                    <th>ISBN</th>
+                    <th>Issue Date</th>
+                    <th>Return Date</th>
+                    <th>Fine</th>
                 </tr>
             </thead>
             {% for book in books %}
@@ -34,6 +33,5 @@
             {% endfor %}
         </table>
     </div>
-    <hr>
 </body>
 </html>

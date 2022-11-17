@@ -17,11 +17,11 @@
             <form action="/editBook/{{book[2]}}" method="post">
                 <div>
                     <label for="title">Book Title</label><br>
-                    <input type="text" name="title" value = {{book[0]}} id="title">  
+                    <input type="text" name="title" value = {{book[0]}} id="title" required>  
                 </div>
                 <div>
                     <label for="author">Author</label><br>
-                    <input type="text" name="author" value = {{book[1]}} id="author"> 
+                    <input type="text" name="author" value = {{book[1]}} id="author" required> 
                 </div>
                 <div>
                     <label for="isbn">ISBN</label><br>
@@ -29,15 +29,15 @@
                 </div>
                 <div>
                     <label for="pubDate">Publish Date</label><br>
-                    <input type="date" name="pubDate" value = {{book[3]}} id="pubDate">       
+                    <input type="date" name="pubDate" value = {{book[3]}} id="pubDate" required>       
                 </div>
                 <div>
                     <label for="publication">Publication</label><br>
-                    <input type="text" name="publication" value = {{book[4]}} id="publication">    
+                    <input type="text" name="publication" value = {{book[4]}} id="publication" required>    
                 </div>
                 <div>
                     <label for="nob">No Of Books</label><br>
-                    <input type="number" name="nob" value = {{book[5]}} id="nob">  
+                    <input type="number" name="nob" value = {{book[5]}} id="nob" required>  
                 </div>
                 <div>
                     <input type="submit" value="Update">

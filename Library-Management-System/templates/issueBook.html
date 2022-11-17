@@ -28,15 +28,15 @@
             <form action="/issueBook" method="post">
                 <div>
                     <label for="userId">User ID</label><br>
-                    <input type="text" name="userId" id="userId">
+                    <input type="text" name="userId" id="userId" required>
                 </div>
                 <div>
                     <label for="bookId">ISBN</label><br>
-                    <input type="number" name="isbn" id="bookId">
+                    <input type="number" name="isbn" id="bookId" required>
                 </div>
                 <div>
                     <label for="issueDate">Issue Date</label><br>
-                    <input type="date" name="issueDate" id="issueDate">
+                    <input type="date" name="issueDate" id="issueDate" required>
                 </div>
                 <div>
                     <input type="submit" value="Issue">
