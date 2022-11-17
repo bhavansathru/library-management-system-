@@ -17,19 +17,19 @@
             <form action="/editUser/{{user[2]}}" method="post">
                 <div>
                     <label for="name">User Name</label><br>
-                    <input type="text" name="name" id="name" value = {{user[0]}} required>   
+                    <input type="text" name="name" id="name" value ="{{user[0]}}" required>   
                 </div>
                 <div>
                     <label for="mail">Mail ID</label><br>
-                    <input type="email" name="email" id="email" value = {{user[1]}} readonly>      
+                    <input type="email" name="email" id="email" value = "{{user[1]}}" readonly>      
                 </div>
                 <div>
                     <label for="password">Password</label><br>
-                    <input type="password" name="password" id="password" value = {{user[3]}} required>       
+                    <input type="password" name="password" id="password" value = "{{user[3]}}" required>       
                 </div>
                 <div>
                     <label for="phno">Phone Number</label><br>
-                    <input type="tel" id="phno" name="phno" pattern="[0-9]{10}" value = {{user[4]}} required>
+                    <input type="tel" id="phno" name="phno" pattern="[0-9]{10}" value = "{{user[4]}}" required>
                 </div>
                 <div>
                     <label for="gender">Gender</label>  

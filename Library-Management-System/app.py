@@ -33,10 +33,19 @@ def addApiBooks():
       req = requests.get("https://frappe.io/api/method/frappe-library")
       apiBooks = json.loads(req.content)['message']
       myBook = []
+      c = 0
       for book in apiBooks:
          book = {'title' : book['title'],'authors' : book['authors'],
-                  'isbn' : book['isbn'],'publicationDate' : book['publication_date'],
+                  'isbn' : book['isbn'],'publicationDate' : '-'.join(book['publication_date'].split('/')[::-1]),
                   'publication' : book['publisher'], 'nob' : 0}
+         if len(book["publicationDate"]) < 10:
+            d = book["publicationDate"].split('-')
+            if len(d[1])<2:
+               d[1] = '0'+d[1]
+            if len(d[2])<2:
+               d[2] = '0'+d[2]
+            book["publicationDate"] = d[0]+'-'+d[2]+'-'+d[1]
+            
          myBook.append(book)
       books = [tuple(book.values()) for book in myBook]
       qry = """create table if not exists bookStocks (title text, author text, isbn text primary key,
@@ -249,7 +258,9 @@ def editBook(bookId):
       datas = mycursor.fetchone()
       mycursor.close()
       mydb.close()
-      print(datas)
+      print(type(datas))
+      for x in datas:
+         print(type(x))
       return render_template("editBook.html", book = datas)
 
 @app.route("/editUser/<string:userID>", methods = ['POST', "GET"])
