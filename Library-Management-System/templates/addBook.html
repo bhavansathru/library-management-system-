@@ -8,6 +8,9 @@
     <title>Add Book</title>
 </head>
 <body>
+    {% for message in get_flashed_messages() %}
+        <h4 style="color:green ;background-color:lightgreen">{{ message }}</h4>
+    {% endfor %}
     <nav><a href="/home">Home</a></nav>
     <div class="block">
         <div>

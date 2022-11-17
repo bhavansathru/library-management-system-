@@ -8,7 +8,9 @@
     <title>Login</title>
 </head>
 <body>
-
+    {% for message in get_flashed_messages() %}
+        <h4 class="message">{{ message }}</h4>
+    {% endfor %}
     <div class="block">
         <div class="header">
             <h1>Admin Login</h1><br>

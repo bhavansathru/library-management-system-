@@ -81,9 +81,11 @@ def login():
         data = myCursor.fetchone() 
         myCursor.close()
         if bool(data):
+            name = data[0]
+            flash(f"Welcome {name}")  
             return redirect('/home')
         else:
-            return  "<h1>invalid User Name password</h1>"  
+            flash("invalid User Name password")
    return render_template("login.html")
 
 @app.route('/home')
