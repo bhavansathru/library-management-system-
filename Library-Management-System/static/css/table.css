@@ -84,3 +84,12 @@ input[type="number"], input[type="date"]{
     font-weight:bolder;
     margin: 0px 10px 0px 0px;
 }
+
+.message{
+    margin: 10px 30px 0px 30px;
+    text-align: left;
+    color : blue ;
+    font-size: larger;
+    padding: 10px 30px 10px 30px;
+    background-color: rgba(17, 138, 236,.5);
+  }

@@ -15,6 +15,9 @@
         </form>
         <a href="/searchBook" class="all-book">Show All Books</a>
     </nav>
+    {% for message in get_flashed_messages() %}
+        <h4 class="message">{{ message }}</h4>
+    {% endfor %}
     <h1>Available Books</h1>
     <hr>
     <div>

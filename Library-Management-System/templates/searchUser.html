@@ -16,6 +16,9 @@
         </form>
         <a href="/searchUser" class="all-user">Show All User</a>
     </nav> 
+    {% for message in get_flashed_messages() %}
+        <h4 class="message">{{ message }}</h4>
+    {% endfor %}
     <h1>Library Members</h1>
     <hr>
     <div>

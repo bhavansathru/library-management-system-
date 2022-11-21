@@ -8,11 +8,15 @@
     <title>Admin</title>
 </head>
 <body>
+    
     <div class="grid-container">
         <div class="grid-item">
             <h1 class="header">Library Management System</h1>
         </div>  
         <hr class="rooler">
+        {% for message in get_flashed_messages() %}
+            <h4 class="message">{{ message }}</h4>
+        {% endfor %}
         <div class="grid-container-link">
             <div class="grid-item-link">
                     <a href="/addUser">Add New User</a><br>
@@ -36,7 +40,7 @@
                 <a href="/issuedBook">Issued Books</a><br>
             </div>
             <div style="display:hide;" class="grid-item-link">
-                <a class="logout" href="/">Logout</a>
+                <a class="logout" href="{{url_for('logout')}}">Logout</a>
             </div>
         </div>    
 </body>

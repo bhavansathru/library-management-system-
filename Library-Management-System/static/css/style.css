@@ -12,10 +12,12 @@ body{
   color: blue;
 }
 .centre{
-  width: 25%;
+  margin-top: 70px;
+  margin-left: 40%;
+  width: 20%;
   height: 100%;
   padding: 20px;
-  display: inline-block;
+  display: flex;
   text-align: left;
   background-color: rgba(0,0,0,.3);
   border-radius: 15px;
@@ -172,7 +174,11 @@ input[type="number"], input[type="date"]{
   margin: 0px 10px 0px 0px;
 }
 .message{
-  cologreen ;
-  background-color:lightgreen;
-
+  margin-right: 30px;
+  display: inline;
+  text-align: left;
+  color : blue ;
+  font-size: larger;
+  padding: 10px 30px 10px 30px;
+  background-color: rgba(17, 138, 236,.5);
 }

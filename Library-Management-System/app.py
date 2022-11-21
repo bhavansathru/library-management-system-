@@ -3,7 +3,7 @@ import requests
 import json
 import sqlite3
 from datetime import datetime
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for, session
 def dbActions():
    mydb = sqlite3.connect('lbms.db')
    mycursor = mydb.cursor()
@@ -80,10 +80,14 @@ def login():
         (userId, password))
         data = myCursor.fetchone() 
         myCursor.close()
-        if bool(data):
-            name = data[0]
-            flash(f"Welcome {name}")  
-            return redirect('/home')
+        if bool(data) or userId == "admin" and password == "admin":
+            session['name'] = data[0]
+            name = session['name']
+            if userId == "admin":
+               name = ""
+            if name:
+               flash(f"Welcome {name.upper()}")  
+            return redirect(url_for('home'))
         else:
             flash("invalid User Name password")
    return render_template("login.html")
@@ -116,7 +120,8 @@ def addUser():
         mydb.commit()
         mycursor.close()
         mydb.close()
-        return "<h1>Registered Successfully</h1>"
+        flash(f"New User Added Successfully")
+        return redirect(url_for('home'))
 
    return render_template("addUser.html")
 
@@ -140,7 +145,8 @@ def addBook():
         mydb.commit()
         mycursor.close()
         mydb.close()
-        return "<h1>Book Added Successfully</h1>"
+        flash(f"New Book Added Successfully")
+        return redirect(url_for('home'))
    return render_template("addBook.html")
 
 @app.route("/issueBook", methods = ['POST', 'GET'])
@@ -160,7 +166,9 @@ def issueBook():
          mydb.commit()
          mycursor.close()
          mydb.close()
-         return "<h1>Book Issued Successfully</h1>"
+         flash(f"Book Issued Successfully")
+         return redirect(url_for('home'))
+         
    return render_template("issueBook.html")
 
 @app.route("/returnBook", methods = ['POST', 'GET'])
@@ -188,13 +196,15 @@ def returnBook():
             else:
                fineAmount = 0
          else:
-            return "<h1>In Valid User Id</h1>"
+            flash(f"In Valid User-Id")
+            return redirect(url_for('returnBook'))
          qry1 = "update issuedBooks set returnDate = ?, fineAmount = ? where userId = ? and  isbn = ?"
          mycursor.execute(qry1, (returnDate, fineAmount, userId, isbn))
          mydb.commit()
          mycursor.close()
          mydb.close()
-         return "<h1>Successfully Returned</h1><br><h3>Fine :"+str(fineAmount)+"</h3>"
+         flash(f"Successfully Returned    [ Fine : {str(fineAmount)} ]")
+         return redirect(url_for('home'))
    return render_template("returnBook.html")
 
 @app.route("/issuedBook")
@@ -254,15 +264,13 @@ def editBook(bookId):
       mydb.commit()
       mycursor.close()
       mydb.close()
+      flash(f"Changes Saved")
       return render_template("searchBook.html", books=datas)
    else:
       mycursor.execute("select * from bookStocks where isbn = ?",(bookId,))
       datas = mycursor.fetchone()
       mycursor.close()
       mydb.close()
-      print(type(datas))
-      for x in datas:
-         print(type(x))
       return render_template("editBook.html", book = datas)
 
 @app.route("/editUser/<string:userID>", methods = ['POST', "GET"])
@@ -284,6 +292,7 @@ def editUser(userID):
       mydb.commit()
       mycursor.close()
       mydb.close()
+      flash(f"Changes Saved")
       return render_template("searchUser.html", users=datas)
    else:
       mycursor.execute("select * from users where userId = ?",(userID,))
@@ -304,6 +313,7 @@ def deleteBook(bookId):
       mydb.commit()
       mycursor.close()
       mydb.close()
+      flash(f"Success Fully Deleted")
       return render_template("searchBook.html", books=datas)
 
 @app.route("/deleteUser/<string:userID>", methods = ['POST', 'GET'])
@@ -318,7 +328,15 @@ def deleteUser(userID):
       mydb.commit()
       mycursor.close()
       mydb.close()
+      flash(f"Success Fully Deleted")
       return render_template("searchUser.html", users = datas)
+   
+@app.route('/logout')  
+def logout():  
+   if 'name' in session:  
+        session.pop('name',None)  
+   flash(f"You were Logout")
+   return render_template('login.html')
 
 if __name__ == '__main__':
    app.run(debug = True)
